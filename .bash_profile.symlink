@@ -1,0 +1,23 @@
+#!/bin/bash
+
+mkdir -p $HOME/bin 
+mkdir -p $HOME/.local/bin
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# ssh, create key and load it into ssh agent
+if ! [ -f "$HOME/.ssh/id_rsa" ]; then
+  mkdir -p $HOME/.ssh/
+  ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -P ""
+fi
+
+eval $(ssh-agent -s)
+ssh-add $HOME/.ssh/id_rsa

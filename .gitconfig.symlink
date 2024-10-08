@@ -1,0 +1,10 @@
+[push]
+        autoSetupRemote = true
+[alias]
+        s = status -s
+        m = checkout main
+        p = push
+        b = "!f() { git checkout \"$1\" || git checkout -b \"$1\"; }; f"
+        a = "!f() { git add . && git commit -m \"$1\" && git push; }; f"
+[pager]
+        branch = false
